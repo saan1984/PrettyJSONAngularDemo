@@ -3,55 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>ng-prettyjson ace editor demo</title>
-    <style>
-        #editor1 {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-    </style>
+    <link rel="stylesheet"
+          href="node_modules/ng-prettyjson/dist/ng-prettyjson.min.css">
 </head>
 <body ng-controller="MyController">
-<div id="editor1">
-    function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-    }
-</div>
-<div id="editor2">
-    function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-    }
-</div>
-<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    var editor = ace.edit("editor2");
-    editor.getSession().setUseWorker(false);
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
-</script>
-    <!--pre pretty-json="jsonObj" id="editor1" edition="true" on-edit="doWith(newJson)"></pre -->
+    <pre pretty-json="jsonObj"
+         edition="true"
+         on-edit="doWith(newJson)" />
 </body>
 <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
 <script type="text/javascript" src="node_modules/requirejs/require.js"  charset="utf-8"></script>
-<script type="text/javascript" src="lib/ace.js"  charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/ng-prettyjson/src/ace.js"  charset="utf-8"></script>
+<script type="text/javascript" src="node_modules/ng-prettyjson/dist/ng-prettyjson.min.js"></script>
 <script>
-
-    var myApp = angular.module('myApp', []);
-    myApp.controller("MyController",function($scope,$rootScope){
-        console.log("$rootScope",$rootScope);
-        console.log("scope.aceEditor",$scope.aceEditor)
-       var editor = ace.edit("editor1");
-        editor.getSession().setUseWorker(false);
-        editor.getSession().setMode('ace/mode/javascript');
-        editor.setTheme("ace/theme/monokai");
+    var myApp = angular.module('myApp', ['ngPrettyJson']);
+    myApp.controller("MyController",function($scope){
         $scope.jsonObj = {"name":"sandeep"};
-        $scope.doWith=function(){
-            console.log("this doWith",this);
-        }
     });
 </script>
 </html>
